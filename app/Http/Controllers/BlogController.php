@@ -16,7 +16,8 @@ class BlogController extends BaseController
     }
 
     function newPost(){
-    	return view('blog.new-post');
+        $category = \App\Category::all();
+    	return view('blog.new-post',compact('category'));
     }
 
     function list(){
@@ -33,7 +34,8 @@ class BlogController extends BaseController
     }
     function details($id){
         $post = Post::find($id);
-    	return view('blog.detail',compact('post'));
+        $category = \App\Category::all();
+    	return view('blog.detail',compact('post'),compact('category'));
     }
 
     public function post(Request $request){
@@ -44,7 +46,7 @@ class BlogController extends BaseController
         }
         Post::create([
             'title'=>$request->title,
-            'category'=>$request->category,
+            'cid'=>$request->cid,
             'content'=>$request->content,
             'image'=>$request->image,
             'author'=>Auth::user()->name
@@ -54,7 +56,8 @@ class BlogController extends BaseController
 
     public function edit($id){
         $post = Post::find($id);
-        return view('blog.edit-post',compact('post'));
+        $category = \App\Category::all();
+        return view('blog.edit-post',compact('post','category'));
     }
 
     public function update(Request $request,$id){
@@ -69,7 +72,7 @@ class BlogController extends BaseController
         Post::where('id',$post->id)
             ->update([
             'title'=>$request->title,
-            'category'=>$request->category,
+            'cid'=>$request->cid,
             'content'=>$request->content,
             'image'=>$request->image
         ]);
@@ -77,6 +80,9 @@ class BlogController extends BaseController
     }
 
     public function delete($id){
+        $post = Post::find($id);
+        if ($post->hasFile('image')){
+            Storage::delete('/public/images/'.$post->image);}
         Post::destroy($id);
         return redirect('blog/list')->with('message','Post Deleted!');
     }

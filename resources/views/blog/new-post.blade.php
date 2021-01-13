@@ -15,12 +15,10 @@
                 <div class="form-group">
                     <input type="text" class="form-control" name ="title" placeholder="Enter Blog title" required/>
                 </div>
-                <select class="form-control show-tick" name="category">
-                    <option>Web Design</option>
-                    <option>Photography</option>
-                    <option>Technology</option>
-                    <option>Lifestyle</option>
-                    <option>Sports</option>
+                <select class="form-control show-tick" name="cid">
+                    @foreach($category as $cat)
+                        <option value = "{{$cat->cid}}" > {{$cat->category}} </option>
+                    @endforeach
                 </select>
             </div>
         </div>

@@ -15,12 +15,10 @@
                 <div class="form-group">
                     <input type="text" class="form-control" name ="title" placeholder="Enter Blog title" required value ="{{$post->title}}"/>
                 </div>
-                <select class="form-control show-tick" name="category">
-                    <option @if ($post->category=='Web Design'){{ 'selected' }}@endif>Web Design </option>
-                    <option @if ($post->category=='Photography'){{ 'selected' }}@endif>Photography</option>
-                    <option @if ($post->category=='Technology'){{ 'selected' }}@endif>Technology</option>
-                    <option @if ($post->category=='Lifestyle'){{ 'selected' }}@endif>Lifestyle</option>
-                    <option @if ($post->category=='Sports'){{ 'selected' }}@endif>Sports</option>
+                <select class="form-control show-tick" name="cid">
+                    @foreach($category as $cat)
+                        <option value = "{{$cat->cid}}" @if ($post->cid==$cat->cid){{ 'selected' }}@endif > {{$cat->category}}</option>
+                    @endforeach
                 </select>
             </div>
         </div>

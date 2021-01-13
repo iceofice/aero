@@ -18,7 +18,7 @@
                         <div class="blogitem-meta">
                             <span><i class="zmdi zmdi-account"></i>By <a href="javascript:void(0);">{{$post->author}}</a></span>
                             <span><i class="zmdi zmdi-comments"></i><a href="javascript:void(0);">Comments(3)</a></span>
-                            <span><a href="{{$post->id}}">Category: {{$post->category}}</a></span>
+                            <span><a href="{{$post->id}}">Category: {{$post->cid}}</a></span>
                         </div>
                         <div class="blogitem-share">
                             <ul class="list-unstyled mb-0">
